@@ -1,0 +1,44 @@
+name: Submit New Action
+description: Submit a new action which, upon review, will be added to the repo.
+title: "[Action]: "
+labels: [action]
+body:
+  - type: markdown
+    attributes:
+      value: "👋 Hi there! Thanks for taking the time to submit a new action, your contribution is appreciated! **Please fill out the fields bellow** to submit your action for automated review, at which point it can be approved for submission into the repo."
+  - type: input
+    id: name
+    attributes:
+      label: "📂 Name"
+      description: "The name of this action for the repo. It's recommended you **set this to whatever the `title` is in your schema.**"
+      placeholder: "Title here..."
+    validations:
+      required: true
+  - type: dropdown
+    id: format
+    attributes:
+      label: "📜 Format"
+      description: "OpenAI allows for both JSON and YAML schemas to be used in accordance with the [OpenAPI standard.](https://spec.openapis.org/oas/latest.html) Keep in mind that **your schema will be linted** according to your choice."
+      options:
+        - JSON
+        - YAML
+      default: 0
+    validations:
+      required: true
+  - type: textarea
+    id: schema
+    attributes:
+      label: "📋 Schema"
+      description: "The schema for the action itself. Ensure that it's **free of syntax errors and any personal information (e.g. API keys)** before submitting. It's a good idea to test this using the [ChatGPT webapp](https://chat.openai.com/gpts/editor) beforehand."
+      placeholder: "Schema here..."
+      render: txt
+    validations:
+      required: true
+  - type: textarea
+    id: desc
+    attributes:
+      label: "📝 Description"
+      description: "A brief description of **what the action does** and guidelines on **how to use it.**"
+      placeholder: "Description here..."
+    validations:
+      required: true
