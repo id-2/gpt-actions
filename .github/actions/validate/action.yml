@@ -1,0 +1,18 @@
+name: "Validate Action Submission"
+description: "Validates action submissions via the issue template."
+author: "bapo2"
+inputs:
+  issue:
+    description: "The full text of the issue."
+    required: true
+  labels:
+    description: "The labels currently applied to the issue."
+    required: true
+outputs:
+  new_issue:
+    description: "A complete issue, reformatted appropriately, meant to replace the original issue."
+  labels:
+    description: "The labels to apply to the issue (comma-separated)."
+runs:
+  using: "docker"
+  image: "Dockerfile"
