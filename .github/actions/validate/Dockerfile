@@ -9,7 +9,8 @@ WORKDIR /src
 RUN chmod +x /src/validate.py
 
 # Install dependencies
-# RUN pip install -r requirements.txt
+RUN pip install pyyaml
+RUN pip install yamllint
 
 # Create a new stage for setting up the environment
 FROM base as final

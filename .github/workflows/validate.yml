@@ -21,6 +21,32 @@ jobs:
       - name: Validate Action
         uses: ./.github/actions/validate
         with:
-          issue: ${{ github.event.issue.body }}
-          labels: ${{ steps.issue_labels.outputs.result }}
+          issue_number: ${{ github.event.issue.number }}
+          issue_body: ${{ github.event.issue.body }}
+          issue_labels: ${{ steps.issue_labels.outputs.result }}
         id: validate
+      - name: Update Issue
+        uses: actions/github-script@v5
+        with:
+          script: |
+            if (`${{ steps.validate.outputs.issue_labels }}`.split(',').includes('new-schema')) {
+              github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `${{ steps.validate.outputs.issue_body }}`.replace(/%60/g, '`'),
+                labels: `${{ steps.validate.outputs.issue_labels }}`.split(',')
+              });
+            }
+      - name: Post Comment
+        uses: actions/github-script@v5
+        with:
+          script: |
+            if (`${{ steps.validate.outputs.issue_comment }}`.replace(/%60/g, '`') !==  '') {
+              github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `${{ steps.validate.outputs.issue_comment }}`.replace(/%60/g, '`')
+              });
+            }

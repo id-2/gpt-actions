@@ -1,7 +1,7 @@
 name: Submit New Action
-description: Submit a new action which, upon review, will be added to the repo.
-title: "[Action]: "
-labels: [action]
+description: Submit a new action schema which, upon review, will be added to the repo.
+title: "[New GPT Action]: "
+labels: [new-schema]
 body:
   - type: markdown
     attributes:
@@ -34,11 +34,26 @@ body:
       render: txt
     validations:
       required: true
+  - type: dropdown
+    id: auth
+    attributes:
+      label: "🔑 Authentication"
+      description: "If your action requires authentication, please select the appropriate option. If not, select `None`."
+      options:
+        - No authentication
+        - API Key [Basic]
+        - API Key [Bearer]
+        - API Key [Other]
+        - OAuth [Default]
+        - OAuth [Basic auth header]
+      default: 0
+    validations:
+      required: true
   - type: textarea
     id: desc
     attributes:
       label: "📝 Description"
-      description: "A brief description of **what the action does** and guidelines on **how to use it.**"
+      description: "A brief description of **what the action does** and guidelines on **how to use it.** Also, **if applicable, describe how to set up appropriate authentication.**"
       placeholder: "Description here..."
     validations:
       required: true
