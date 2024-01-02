@@ -12,10 +12,11 @@ comment = ""
 def set_var(key, value):
     print(f"📝 Setting output variable '{key}'...")
     value = value.replace('%', '%25')   # Replace '%' characters with '%25'
+    value = value.replace('`', '%60')   # Replace backtick characters with '%60'
     value = value.replace('\n', '%0A')  # Replace newline characters with '%0A'
     value = value.replace('\r', '%0D')  # Replace carriage return characters with '%0D'
-    value = value.replace('`', '%60')   # Replace backtick characters with '%60'
-    print(f"::set-output name={key}::{value}")
+    with open(os.getenv('GITHUB_OUTPUT'), 'a') as file:
+        file.write(f"{key}={value}\n")
 
 # Function to mark automatic validation as a failure
 def fail(fail_label, fail_reason=""):

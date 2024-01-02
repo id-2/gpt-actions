@@ -34,7 +34,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
-                body: `${{ steps.validate.outputs.issue_body }}`.replace(/%60/g, '`'),
+                body: `${{ steps.validate.outputs.issue_body }}`.replace(/%0D/g, '\r').replace(/%0A/g, '\n').replace(/%60/g, '`').replace(/%25/g, '%'),
                 labels: `${{ steps.validate.outputs.issue_labels }}`.split(',')
               });
             }
@@ -42,11 +42,11 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            if (`${{ steps.validate.outputs.issue_comment }}`.replace(/%60/g, '`') !==  '') {
+            if (`${{ steps.validate.outputs.issue_comment }}`.replace(/%0D/g, '\r').replace(/%0A/g, '\n').replace(/%60/g, '`').replace(/%25/g, '%') !==  '') {
               github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
-                body: `${{ steps.validate.outputs.issue_comment }}`.replace(/%60/g, '`')
+                body: `${{ steps.validate.outputs.issue_comment }}`.replace(/%0D/g, '\r').replace(/%0A/g, '\n').replace(/%60/g, '`').replace(/%25/g, '%')
               });
             }
