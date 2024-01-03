@@ -11,3 +11,8 @@
 - [ ] My changes are not any additions of new action-schemas or changes to existing ones (there is a separate means of doing this).
 - [ ] I have made efforts to ensure that my changes are consistent with what is already present in the repository, and that they are not redundant.
 - [ ] I have made efforts to ensure that my changes do not break any existing functionality.
+
+### 🔗 Linked Issue(s)
+
+- You should link any relevant issues here as a list of bullets.
+- Each one should abide by [the appropriate linkage syntax.](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)
